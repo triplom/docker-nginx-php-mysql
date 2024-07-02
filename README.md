@@ -38,7 +38,7 @@ ___
 
 To run the docker commands without using **sudo** you must add the **docker** group to **your-user**:
 
-```
+```bash
 sudo usermod -aG docker your-user
 ```
 
@@ -52,7 +52,7 @@ All requisites should be available for your distribution. The most important are
 
 Check if `docker-compose` is already installed by entering the following command : 
 
-```sh
+```bash
 which docker-compose
 ```
 
@@ -62,13 +62,13 @@ Check Docker Compose compatibility :
 
 The following is optional but makes life more enjoyable :
 
-```sh
+```bash
 which make
 ```
 
 On Ubuntu and Debian these are available in the meta-package build-essential. On other distributions, you may need to install the GNU C++ compiler separately.
 
-```sh
+```bash
 sudo apt install build-essential
 ```
 
@@ -98,19 +98,19 @@ ___
 
 To install [Git](http://git-scm.com/book/en/v2/Getting-Started-Installing-Git), download it and install following the instructions :
 
-```sh
+```bash
 git clone https://github.com/nanoninja/docker-nginx-php-mysql.git
 ```
 
 Go to the project directory :
 
-```sh
+```bash
 cd docker-nginx-php-mysql
 ```
 
 ### Project tree
 
-```sh
+```bash
 .
 ├── Makefile
 ├── README.md
@@ -150,7 +150,7 @@ If you modify the host name, do not forget to add it to the `/etc/hosts` file.
 
 1. Generate SSL certificates
 
-    ```sh
+    ```bash
     source .env && docker run --rm -v $(pwd)/etc/ssl:/certificates -e "SERVER=$NGINX_HOST" jacoelho/generate-certificate
     ```
 
@@ -160,7 +160,7 @@ If you modify the host name, do not forget to add it to the `/etc/hosts` file.
 
     Edit nginx file `etc/nginx/default.template.conf` and uncomment the SSL server section :
 
-    ```sh
+    ```bash
     # server {
     #     server_name ${NGINX_HOST};
     #
@@ -180,7 +180,7 @@ For a better integration of Docker to PHPStorm, use the [documentation](https://
 
 1. Get your own local IP address :
 
-    ```sh
+    ```bash
     sudo ifconfig
     ```
 
@@ -188,7 +188,7 @@ For a better integration of Docker to PHPStorm, use the [documentation](https://
 
 3. Set the `remote_host` parameter with your IP :
 
-    ```sh
+    ```bash
     xdebug.remote_host=192.168.0.1 # your IP
     ```
 ___
@@ -197,19 +197,19 @@ ___
 
 1. Copying the composer configuration file : 
 
-    ```sh
+    ```bash
     cp web/app/composer.json.dist web/app/composer.json
     ```
 
 2. Start the application :
 
-    ```sh
+    ```bash
     docker-compose up -d
     ```
 
     **Please wait this might take a several minutes...**
 
-    ```sh
+    ```bash
     docker-compose logs -f # Follow log output
     ```
 
@@ -221,7 +221,7 @@ ___
 
 4. Stop and clear services
 
-    ```sh
+    ```bash
     docker-compose down -v
     ```
 
@@ -250,13 +250,13 @@ When developing, you can use [Makefile](https://en.wikipedia.org/wiki/Make_(soft
 
 Start the application :
 
-```sh
+```bash
 make docker-start
 ```
 
 Show help :
 
-```sh
+```bash
 make help
 ```
 
@@ -266,49 +266,49 @@ ___
 
 ### Installing package with composer
 
-```sh
+```docker
 docker run --rm -v $(pwd)/web/app:/app composer require symfony/yaml
 ```
 
 ### Updating PHP dependencies with composer
 
-```sh
+```docker
 docker run --rm -v $(pwd)/web/app:/app composer update
 ```
 
 ### Generating PHP API documentation
 
-```sh
+```docker
 docker run --rm -v $(pwd):/data phpdoc/phpdoc -i=vendor/ -d /data/web/app/src -t /data/web/app/doc
 ```
 
 ### Testing PHP application with PHPUnit
 
-```sh
+```docker
 docker-compose exec -T php ./app/vendor/bin/phpunit --colors=always --configuration ./app
 ```
 
 ### Fixing standard code with [PSR2](http://www.php-fig.org/psr/psr-2/)
 
-```sh
+```docker
 docker-compose exec -T php ./app/vendor/bin/phpcbf -v --standard=PSR2 ./app/src
 ```
 
 ### Checking the standard code with [PSR2](http://www.php-fig.org/psr/psr-2/)
 
-```sh
+```docker
 docker-compose exec -T php ./app/vendor/bin/phpcs -v --standard=PSR2 ./app/src
 ```
 
 ### Analyzing source code with [PHP Mess Detector](https://phpmd.org/)
 
-```sh
+```docker
 docker-compose exec -T php ./app/vendor/bin/phpmd ./app/src text cleancode,codesize,controversial,design,naming,unusedcode
 ```
 
 ### Checking installed PHP extensions
 
-```sh
+```docker
 docker-compose exec php php -m
 ```
 
@@ -316,29 +316,29 @@ docker-compose exec php php -m
 
 #### MySQL shell access
 
-```sh
+```docker
 docker exec -it mysql bash
 ```
 
 and
 
-```sh
+```sql
 mysql -u"$MYSQL_ROOT_USER" -p"$MYSQL_ROOT_PASSWORD"
 ```
 
 #### Creating a backup of all databases
 
-```sh
+```bash
 mkdir -p data/db/dumps
 ```
 
-```sh
+```bash
 source .env && docker exec $(docker-compose ps -q mysqldb) mysqldump --all-databases -u"$MYSQL_ROOT_USER" -p"$MYSQL_ROOT_PASSWORD" > "data/db/dumps/db.sql"
 ```
 
 #### Restoring a backup of all databases
 
-```sh
+```bash
 source .env && docker exec -i $(docker-compose ps -q mysqldb) mysql -u"$MYSQL_ROOT_USER" -p"$MYSQL_ROOT_PASSWORD" < "data/db/dumps/db.sql"
 ```
 
@@ -346,13 +346,13 @@ source .env && docker exec -i $(docker-compose ps -q mysqldb) mysql -u"$MYSQL_RO
 
 **`Notice:`** Replace "YOUR_DB_NAME" by your custom name.
 
-```sh
+```bash
 source .env && docker exec $(docker-compose ps -q mysqldb) mysqldump -u"$MYSQL_ROOT_USER" -p"$MYSQL_ROOT_PASSWORD" --databases YOUR_DB_NAME > "data/db/dumps/YOUR_DB_NAME_dump.sql"
 ```
 
 #### Restoring a backup of single database
 
-```sh
+```bash
 source .env && docker exec -i $(docker-compose ps -q mysqldb) mysql -u"$MYSQL_ROOT_USER" -p"$MYSQL_ROOT_PASSWORD" < "data/db/dumps/YOUR_DB_NAME_dump.sql"
 ```
 
