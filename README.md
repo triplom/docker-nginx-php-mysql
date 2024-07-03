@@ -1,4 +1,4 @@
-# Nginx PHP MySQL [![Build Status](https://travis-ci.org/nanoninja/docker-nginx-php-mysql.svg?branch=master)](https://travis-ci.org/nanoninja/docker-nginx-php-mysql) [![GitHub version](https://badge.fury.io/gh/nanoninja%2Fdocker-nginx-php-mysql.svg)](https://badge.fury.io/gh/nanoninja%2Fdocker-nginx-php-mysql)
+# Nginx PHP MySQL 
 
 Docker running Nginx, PHP-FPM, Composer, MySQL and PHPMyAdmin.
 
@@ -76,7 +76,7 @@ sudo apt install build-essential
 
 * [Nginx](https://hub.docker.com/_/nginx/)
 * [MySQL](https://hub.docker.com/_/mysql/)
-* [PHP-FPM](https://hub.docker.com/r/nanoninja/php-fpm/)
+* [PHP-FPM](https://hub.docker.com/_/php-fpm/)
 * [Composer](https://hub.docker.com/_/composer/)
 * [PHPMyAdmin](https://hub.docker.com/r/phpmyadmin/phpmyadmin/)
 * [Generate Certificate](https://hub.docker.com/r/jacoelho/generate-certificate/)
@@ -181,7 +181,7 @@ For a better integration of Docker to PHPStorm, use the [documentation](https://
 1. Get your own local IP address :
 
     ```bash
-    sudo ifconfig
+    sudo ip address
     ```
 
 2. Edit php file `etc/php/php.ini` and comment or uncomment the configuration as needed.
@@ -201,7 +201,7 @@ ___
     cp web/app/composer.json.dist web/app/composer.json
     ```
 
-2. Start the application :
+2. Start the application : # Second 
 
     ```bash
     docker-compose up -d
