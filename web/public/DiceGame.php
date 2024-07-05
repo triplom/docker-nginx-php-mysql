@@ -2,10 +2,10 @@
 
 // Function to roll the dice
 function rollDice() {
-    $die1 = rand(1, 6);
-    $die2 = rand(1, 6);
-    $sum = $die1 + $die2;
-    return json_encode(['die1' => $die1, 'die2' => $die2, 'sum' => $sum]);
+    $dice1 = rand(1, 6);
+    $dice2 = rand(1, 6);
+    $sum = $dice1 + $dice2;
+    return json_encode(['dice1' => $dice1, 'dice2' => $dice2, 'sum' => $sum]);
 }
 
 // Check if the request is via AJAX
@@ -18,6 +18,7 @@ if (isset($_POST['roll'])) {
 include("LastUpdate.php");
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,7 +47,7 @@ include("LastUpdate.php");
             margin-top: 20px;
             font-size: 1.2em;
         }
-        .die {
+        .dice {
             font-weight: bold;
             color: #ff6347; /* Tomato color */
         }
@@ -67,7 +68,7 @@ include("LastUpdate.php");
 
             // Create an AJAX request to the server
             const xhr = new XMLHttpRequest();
-            xhr.open("POST", "roll_dice.php", true);
+            xhr.open("POST", "", true);  // Ensure the correct URL is used
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
             xhr.onreadystatechange = function () {
@@ -77,8 +78,8 @@ include("LastUpdate.php");
                         // Process the JSON response
                         const result = JSON.parse(xhr.responseText);
                         document.getElementById('result').innerHTML =
-                            "First die result: <span class='die'>" + result.die1 + "</span><br>" +
-                            "Second die result: <span class='die'>" + result.die2 + "</span><br>" +
+                            "First dice result: <span class='dice'>" + result.dice1 + "</span><br>" +
+                            "Second dice result: <span class='dice'>" + result.dice2 + "</span><br>" +
                             "Sum of dice: <span class='sum'>" + result.sum + "</span>";
                     } else {
                         console.error("Error: " + xhr.status); // Debugging log

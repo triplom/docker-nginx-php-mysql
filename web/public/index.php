@@ -54,6 +54,7 @@ $foo = new App\Acme\Foo();
             <h1>Docker <?php echo $foo->getName(); ?></h1>
             <h2>Docker - Marcel Test</h2>
             <h3><a href="LastUpdate.php">Last Update</a></h3>
+            <h4><a href="phpVersion.php">PHP Version Page</a></h4>
         </header>
         
         <nav>
@@ -62,6 +63,7 @@ $foo = new App\Acme\Foo();
                 <li><a href="HangMan.php">Hangman Game</a></li>
                 <li><a href="DiceGame.php">Dice Game</a></li>
                 <li><a href="Sudoku.php">Sudoku Game</a></li>
+                <li><a href="PaperRocks.php">Paper-Rocks Game</a></li>
             </ul>
         </nav>
     </div>
