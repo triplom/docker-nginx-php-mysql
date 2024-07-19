@@ -54,6 +54,8 @@ $foo = new App\Acme\Foo();
             <h1>Docker <?php echo $foo->getName(); ?></h1>
             <h2>Docker - Marcel Test</h2>
             <h3><a href="LastUpdate.php">Last Update</a></h3>
+            <h3><a href="index.html">Terminal Web</a></h3>
+            <h3><a href="xterm.html">XTerm</a></h3>
             <h4><a href="phpVersion.php">PHP Version Page</a></h4>
         </header>
         

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terminal</title>
+
+  <!-- Load the xterm.css stylesheet from node_modules -->
+  <link rel="stylesheet" href="node_modules/@xterm/xterm/css/xterm.css">
+
+  <!-- Load your custom terminal.css stylesheet -->
+  <link rel="stylesheet" href="terminal.css">
+
+  <!-- Add favicon -->
+  <link rel="icon" href="favicon.png" type="image/x-icon">
+
+  <!-- Load the JavaScript module for terminal setup -->
+  <script type="module" src="terminal.js" defer></script>
+</head>
+<body>
+  <!-- Terminal container -->
+  <div id="terminal"></div>
+</body>
+</html>
+
+// Include last user view (if needed)
+include("LastUpdate.php");
